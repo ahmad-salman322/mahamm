@@ -1,0 +1,12 @@
+name: 🌐 Missing course translation · ترجمة مساق ناقصة
+description: A course shows only its Hebrew name · مساق يظهر باسمه العبري فقط
+labels: [translation]
+body:
+  - type: textarea
+    id: courses
+    attributes:
+      label: Courses · المساقات
+      description: "One per line: Hebrew name | English | Arabic · سطر لكل مساق: الاسم العبري | الإنجليزي | العربي"
+      placeholder: "תיכון מונחה עצמים | Object-Oriented Design | تصميم البرمجيات الكائنية"
+    validations:
+      required: true

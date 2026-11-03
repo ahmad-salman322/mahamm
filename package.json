@@ -1,0 +1,17 @@
+{
+  "name": "mahamm",
+  "version": "1.0.0",
+  "description": "Your Moodle assignments and deadlines in one report – desktop program (GUI + CLI) and browser extension. English / العربية.",
+  "type": "module",
+  "bin": { "mahamm": "app/bin/mahamm.js" },
+  "files": ["app", "core", "README.md", "README.ar.md", "LICENSE"],
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node app/bin/mahamm.js",
+    "test": "node --test tests/",
+    "build:extension": "node scripts/build-extension.mjs",
+    "build:binaries": "node scripts/build-binaries.mjs"
+  },
+  "keywords": ["moodle", "assignments", "deadlines", "jce", "azrieli", "browser-extension", "cli"],
+  "license": "MIT"
+}

@@ -1,0 +1,10 @@
+name: 💡 Suggest an idea · اقتراح فكرة
+description: A feature or improvement · ميزة أو تحسين
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea · فكرتك
+    validations:
+      required: true

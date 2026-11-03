@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mahamm</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header>
+  <div class="brand"><img src="icons/32.png" alt=""><b data-t="appName"></b></div>
+  <div class="tools">
+    <span class="seg"><button data-lang="en">EN</button><button data-lang="ar">ع</button></span>
+    <button id="settingsBtn" class="icon" title="">⚙</button>
+  </div>
+</header>
+
+<section id="login" class="hidden">
+  <p class="muted" data-t="tagline"></p>
+  <label data-t="site"></label>
+  <input type="text" id="site">
+  <button class="primary" id="signInBtn" data-t="connect"></button>
+  <div class="msg" id="loginMsg"></div>
+</section>
+
+<section id="main" class="hidden">
+  <div class="row">
+    <select id="semester"></select>
+    <button id="refreshBtn" class="icon" title="">⟳</button>
+  </div>
+  <div class="muted small" id="status"></div>
+  <div id="list"></div>
+  <button class="primary" id="reportBtn" data-t="fullReport"></button>
+</section>
+
+<section id="settings" class="hidden">
+  <div class="muted small" id="who"></div>
+  <label class="check"><input type="checkbox" id="materials"><span data-t="includeMaterials"></span></label>
+  <details>
+    <summary data-t="desktopKey"></summary>
+    <p class="muted small" data-t="desktopKeyHint"></p>
+    <div class="row"><input type="text" id="key" readonly><button id="copyKey" data-t="copy"></button></div>
+  </details>
+  <button id="signOutBtn" data-t="disconnect"></button>
+  <button id="backBtn">←</button>
+</section>
+<footer><a href="#" id="bugLink" data-t="reportProblem"></a><span class="muted small" id="ver"></span></footer>
+<script type="module" src="popup.js"></script>
+</body>
+</html>
