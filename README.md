@@ -21,23 +21,74 @@ Built for Azrieli College of Engineering Jerusalem (`moodle.jce.ac.il`), works w
 
 ### Install
 
-Download the file for your system from **[Releases](../../releases/latest)**. Nothing else is needed.
+Open the **[latest release](https://github.com/ahmad-salman322/mahamm/releases/latest)** and scroll down to **Assets**. Download **only the one file** for your system. You do not need Node.js or anything else.
 
-| System | File |
+| Your computer | Download this file |
 |---|---|
 | Windows | `mahamm-windows-x64.exe` |
-| macOS (Apple Silicon / Intel) | `mahamm-macos-arm64` / `mahamm-macos-x64` |
-| Linux | `mahamm-linux-x64` / `mahamm-linux-arm64` |
+| Mac with Apple chip (M1, M2, M3, M4…) | `mahamm-macos-arm64` |
+| Mac with Intel chip | `mahamm-macos-x64` |
+| Linux (most PCs) | `mahamm-linux-x64` |
+| Linux on ARM (Raspberry Pi, ARM laptops) | `mahamm-linux-arm64` |
 
-- **macOS / Linux:** make it executable with `chmod +x mahamm-*`. On macOS, if it is blocked, run `xattr -d com.apple.quarantine mahamm-macos-*`.
-- **With Node.js 22+ instead:** run `npm install -g github:<owner>/mahamm`, then use `mahamm`.
+> Not sure which Mac you have? Apple menu → **About This Mac**. "Chip: Apple M…" means `arm64`, "Processor: Intel" means `x64`.
+>
+> The files named "Source code (zip / tar.gz)" are the source, not the program. You don't need them.
+
+#### Windows
+
+1. Double-click `mahamm-windows-x64.exe`.
+2. Windows may show **"Windows protected your PC"**, because the program is not signed by a paid certificate. Click **More info**, then **Run anyway**. This happens only the first time.
+3. A black window opens, and then a page in your browser. **Keep the black window open** while you use Mahamm.
+
+To use the terminal commands, open PowerShell in the folder with the file and run `.\mahamm-windows-x64.exe report`, for example. You can rename the file to `mahamm.exe` to make it shorter.
+
+#### macOS
+
+Open **Terminal**, then run (replace `arm64` with `x64` on an Intel Mac):
+
+```sh
+cd ~/Downloads
+chmod +x mahamm-macos-arm64
+xattr -d com.apple.quarantine mahamm-macos-arm64
+./mahamm-macos-arm64
+```
+
+- `chmod +x` makes the file runnable. `xattr …` removes the "downloaded from the internet" mark, so macOS does not say *"cannot be opened because the developer cannot be verified"*.
+- If macOS still blocks it: **System Settings → Privacy & Security**, scroll down, click **Open Anyway**, and run it again.
+
+#### Linux
+
+```sh
+cd ~/Downloads
+chmod +x mahamm-linux-x64
+./mahamm-linux-x64
+```
+
+Optional: move it into your PATH so you can type just `mahamm`:
+
+```sh
+mkdir -p ~/.local/bin && mv mahamm-linux-x64 ~/.local/bin/mahamm
+```
+
+#### With Node.js instead (any system)
+
+If you already have Node.js 22 or newer:
+
+```sh
+npm install -g github:ahmad-salman322/mahamm
+mahamm
+```
 
 ### Use it with the window
 
-Run `mahamm` (or double-click it). A page opens in your browser:
+Run the program (double-click on Windows, `./mahamm-…` on macOS / Linux). A page opens in your browser:
 
-1. **Sign in to Moodle.** A separate browser window opens on the college login. Sign in there as usual, and the window closes by itself.
+1. Click **Sign in to Moodle.** A separate browser window opens on the college login. Sign in there as usual (Microsoft / SSO included), and the window closes by itself.
 2. Pick the semester, language, file type and folder, then click **Create report**. A live preview is shown next to the options.
+3. When you are done, close the browser tab. The program stops by itself after about a minute, or press `Ctrl+C` in its window.
+
+If the page does not open by itself, look at the program's window: it prints an address like `http://127.0.0.1:…`. Copy it into your browser.
 
 ### Use it from the terminal
 
@@ -69,18 +120,51 @@ PDF output uses a browser that is already installed (Chrome, Edge, Chromium, Bra
 
 ## Browser extension
 
-- **Chrome / Edge / Brave:** download `mahamm-extension-chrome-*.zip` from Releases and unzip it. Open `chrome://extensions` (or `edge://extensions`), turn on **Developer mode**, click **Load unpacked**, and choose the folder.
-- **Firefox:** install from addons.mozilla.org once it is published. For testing: open `about:debugging` → **This Firefox** → **Load Temporary Add-on**, and pick `manifest.json` from the unzipped `mahamm-extension-firefox-*.zip`.
+The extension is not in the Chrome or Firefox stores yet, so you load it by hand. It takes a minute.
+
+**Chrome / Edge / Brave**
+
+1. From the [latest release](https://github.com/ahmad-salman322/mahamm/releases/latest), download `mahamm-extension-chrome-<version>.zip`.
+2. Unzip it (right-click → **Extract All** on Windows, double-click on macOS). You get a folder with `manifest.json` inside.
+3. Move that folder somewhere permanent, e.g. Documents. **Do not delete it later**, or the extension stops working.
+4. Open `chrome://extensions` (Edge: `edge://extensions`, Brave: `brave://extensions`).
+5. Turn on **Developer mode** (top-right in Chrome, left side in Edge).
+6. Click **Load unpacked** and choose the folder that **directly contains `manifest.json`**. If you get "Manifest file is missing", you picked the folder one level too high.
+7. Click the puzzle icon 🧩 in the toolbar and pin **Mahamm**.
+
+**Firefox**
+
+Firefox only keeps hand-loaded extensions until it restarts. Until Mahamm is on addons.mozilla.org:
+
+1. Download and unzip `mahamm-extension-firefox-<version>.zip`.
+2. Open `about:debugging` → **This Firefox** → **Load Temporary Add-on…**
+3. Pick the `manifest.json` file inside the unzipped folder.
 
 Click the icon, then **Sign in to Moodle**. A tab opens on the college login and closes by itself when you are done. The list refreshes every hour. **Full report** opens a page where you can print or save a PDF, or download HTML, Markdown or JSON, choosing where to save each file.
 
 Under ⚙ there is a **key for the desktop program**: `mahamm login --token <key>` signs the program in without opening a browser.
 
+## Troubleshooting
+
+| Problem | What to do |
+|---|---|
+| The release page has no program files, only "Source code" | No release has been built yet. Ask the maintainer, or use the Node.js install above. |
+| Windows: "Windows protected your PC" | **More info → Run anyway**. |
+| Windows: the black window opens and closes at once | Open PowerShell in that folder and run `.\mahamm-windows-x64.exe`, so you can read the error. Then use **Report a problem**. |
+| macOS: "cannot be opened because the developer cannot be verified" / "is damaged" | Run the `xattr -d com.apple.quarantine …` command from the macOS steps. |
+| macOS / Linux: `permission denied` | Run `chmod +x` on the file first. |
+| macOS: `bad CPU type in executable` | You downloaded the wrong file. Use `arm64` for Apple chips and `x64` for Intel. |
+| Linux: double-clicking does nothing | Run it from a terminal: `./mahamm-linux-x64`. |
+| The sign-in window does not open, or does not close after login | Run `mahamm login --paste` and follow the steps. |
+| "No supported browser found" | Install Chrome, Edge, Chromium, Brave or Firefox. To sign in without one, use `mahamm login --paste`. For reports, choose HTML or Markdown instead of PDF. |
+| A course shows only its Hebrew name | It has no translation yet. See [Course name translations](#course-name-translations). |
+| Chrome: "Manifest file is missing or unreadable" | Choose the folder that directly contains `manifest.json`. |
+
 ## Report a problem
 
 Use **Report a problem**: the button in the window, the link at the bottom of the extension popup, or `mahamm bug` in the terminal. It opens a form on GitHub Issues with the version, system, browser and the last error already filled in. Your Moodle key, password, name and tasks are never included, and you see everything before you send it. You need a free GitHub account to submit.
 
-Ideas and missing course translations have their own forms on the [Issues page](../../issues/new/choose).
+Ideas and missing course translations have their own forms on the [Issues page](https://github.com/ahmad-salman322/mahamm/issues/new/choose).
 
 ## Sign-in and privacy
 
